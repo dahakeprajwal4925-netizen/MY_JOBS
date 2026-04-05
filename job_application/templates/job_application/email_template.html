@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial;
+            background: #f3f2ef;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #0a66c2;
+            color: white;
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .content {
+            padding: 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background: #0a66c2;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        .footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        💼 MY_JOBS
+    </div>
+
+    <div class="content">
+        <h2>Hello {{ name }},</h2>
+
+        <p>
+            Thank you for your interest in opportunities at <strong>MY_JOBS</strong>.
+        </p>
+
+        <p>
+            We are pleased to confirm that your application for the position of
+            <strong>{{ job }}</strong> has been successfully received.
+        </p>
+
+        <p>
+            Our recruitment team is currently reviewing your profile. If your qualifications
+            match our requirements, we will contact you for the next steps in the hiring process.
+        </p>
+
+        <p>
+            We appreciate the time and effort you invested in applying and look forward to
+            potentially working with you.
+        </p>
+
+        <a href="#" class="btn">View Application Status</a>
+
+        <p style="margin-top:25px;">
+            Kind regards,<br>
+            <strong>Recruitment Team</strong><br>
+            MY_JOBS
+        </p>
+    </div>
+
+    <div class="footer">
+        © 2026 MY_JOBS. All rights reserved.<br>
+        This is an automated message. Please do not reply.
+    </div>
+
+</div>
+
+</body>
+</html>

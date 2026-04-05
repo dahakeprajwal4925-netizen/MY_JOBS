@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MY_JOBS Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial;
+            background: #f3f2ef;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: white;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #0a66c2;
+        }
+
+        .search {
+            width: 40%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        /* LAYOUT */
+        .container {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* LEFT SIDEBAR */
+        .sidebar {
+            width: 20%;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 70px;
+            border-radius: 50%;
+        }
+
+        .menu {
+            margin-top: 20px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .menu a:hover {
+            background: #eef3f8;
+        }
+
+        /* CENTER CONTENT */
+        .feed {
+            width: 55%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn {
+            margin-top: 10px;
+            padding: 8px 14px;
+            border: none;
+            background: #0a66c2;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* RIGHT PANEL */
+        .right {
+            width: 25%;
+        }
+
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">💼 MY_JOBS</div>
+    <input type="text" class="search" placeholder="Search jobs...">
+</div>
+
+<div class="container">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+        <div class="profile">
+            <img src="https://i.pravatar.cc/100" alt="profile">
+            <h3>{{ request.user.username }}</h3>
+            <p>Job Seeker</p>
+        </div>
+
+        <div class="menu">
+            <a href="#">🏠 Home</a>
+            <a href="#">📄 Applications</a>
+            <a href="#">💬 Messages</a>
+            <a href="#">🔔 Notifications</a>
+        </div>
+    </div>
+
+    <!-- CENTER FEED -->
+    <div class="feed">
+        {% for app in apps %}
+        <div class="card">
+            <div class="job-title">{{ app.job_title }}</div>
+            <p>Applicant: {{ app.first_name }} {{ app.last_name }}</p>
+            <p>Email: {{ app.email }}</p>
+
+            <button class="btn">View Details</button>
+        </div>
+        {% empty %}
+        <div class="card">
+            <p>No applications yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+        <div class="stats">
+            <h3>📊 Dashboard Stats</h3>
+            <p>Total Applications: {{ apps|length }}</p>
+            <p>Status: Active</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

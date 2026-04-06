@@ -100,12 +100,11 @@ LOGOUT_REDIRECT_URL = '/'
 import os
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'apikey'  # MUST be 'apikey'
+EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')
 
-DEFAULT_FROM_EMAIL = f"MY_JOBS <{os.getenv('EMAIL_USER')}>"
+DEFAULT_FROM_EMAIL = 'MY_JOBS <your_verified_email@domain.com>'

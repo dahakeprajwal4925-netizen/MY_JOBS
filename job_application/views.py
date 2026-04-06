@@ -9,11 +9,18 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+import threading
+
 from .forms import JobApplicationForm, RegisterForm
 from .models import JobApplication
 
 
-# ✅ HOME VIEW (Apply Job + Email + Popup)
+# 🔥 SEND EMAIL IN BACKGROUND (NO TIMEOUT)
+def send_email_async(email):
+    email.send(fail_silently=True)
+
+
+# ✅ HOME VIEW
 def home(request):
     form = JobApplicationForm()
 
@@ -23,8 +30,8 @@ def home(request):
         if form.is_valid():
             app = form.save()
 
-            # 📧 Send Email (SAFE)
             try:
+                # 🎨 HTML email
                 html_content = render_to_string(
                     'job_application/email_template.html',
                     {
@@ -44,13 +51,13 @@ def home(request):
                 )
 
                 email.attach_alternative(html_content, "text/html")
-                email.send(fail_silently=True)
 
-            except Exception as e:
-                print("Email error:", e)
+                # 🚀 NON-BLOCKING EMAIL
+                threading.Thread(target=send_email_async, args=(email,)).start()
+
+            except Exception:
                 messages.warning(request, "Application saved, but email failed.")
 
-            # ✅ Success Message
             messages.success(
                 request,
                 f"Thank you {app.first_name}! Your application has been submitted."
@@ -90,7 +97,7 @@ def register_view(request):
     return render(request, 'job_application/register.html', {'form': form})
 
 
-# ✅ LOGIN USER
+# ✅ LOGIN VIEW
 def login_view(request):
     form = AuthenticationForm(request, data=request.POST or None)
 
